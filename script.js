@@ -144,6 +144,13 @@ function copiar() {
 
     document.body.appendChild(tempTextarea);
     tempTextarea.select();
-    document.body.removeChild(tempTextarea);
+    try {
+        document.execCommand("copy");
+    } catch (err) {
+        console.error("Erro ao copiar texto: ", err);
+    } finally {
+        document.body.removeChild(tempTextarea);
+    }
+
 }
 
