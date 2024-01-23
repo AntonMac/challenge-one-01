@@ -5,7 +5,8 @@
 import  { _chave }  from './chave.js';
 */
 
-let _chave = [
+/* modificada para atender os requisitos de criptografia do desafio.
+let _chaveOld = [
     { key: '0', value: 'A' },
     { key: '1', value: 'C' },
     { key: '2', value: 'E' },
@@ -73,9 +74,38 @@ let _chave = [
     { key: '?', value: 'G' }
 
 ];
+*/
 
+let _chave = [    //chave dentro dos parametros
+    { key: 'e', value: "enter" },
+    { key: 'i', value: "imes" },
+    { key: 'a', value: "ai" },
+    { key: 'o', value: 'ober' },
+    { key: 'u', value: "ufat" },
 
-function cifrar(strEntrada) {
+];
+/*  modificada para atender os requisitos de criptografia do desafio.
+function cifrarOld(strEntrada) {
+    let strSaida ="";
+    
+    for (let c of strEntrada){
+        let foradaChave = false;
+        _chave.forEach( x => {
+            if(c==x.key){
+                strSaida = strSaida + x.value;
+                foradaChave = true;
+            }
+        });  
+        if(!foradaChave) {
+            strSaida = strSaida + c;
+        }
+    }
+    return strSaida;
+
+}
+*/
+
+function cifrar(strEntrada) { //dentro dos parametros
     let strSaida ="";
     
     for (let c of strEntrada){
@@ -94,7 +124,8 @@ function cifrar(strEntrada) {
 
 }
 
-function deCifrar(strEntrada) {
+/*modificada para atender os requisitos de criptografia do desafio.
+function deCifrar_Old(strEntrada) {
     let strSaida ="";
     for (let c of strEntrada){
         let foradaChave = false;
@@ -109,6 +140,17 @@ function deCifrar(strEntrada) {
         }
     }
     return strSaida;
+
+}
+*/
+
+function deCifrar(strEntrada) { //dentro dos parametros
+   
+    let strSaidaDecifrado = strEntrada;
+    for (let c of _chave) {
+        strSaidaDecifrado = strSaidaDecifrado.replaceAll(c.value, c.key);
+    }
+    return strSaidaDecifrado;
 
 }
 
