@@ -110,12 +110,12 @@ function cifrar(strEntrada) { //dentro dos parametros
     
     for (let c of strEntrada){
         let foradaChave = false;
-        _chave.forEach( x => {
+        for (let x of _chave){
             if(c==x.key){
                 strSaida = strSaida + x.value;
                 foradaChave = true;
             }
-        });  
+        }  
         if(!foradaChave) {
             strSaida = strSaida + c;
         }
