@@ -174,7 +174,8 @@ function deCodificar() {
     resultBox.textContent = deCifrar(inputText.trim());
 }
 
-function copiar() {
+/* Modificada para contigência de método depreciado (document.execCommand("copy"))
+function copiarOld() {
     let resultBox = document.getElementById("resultBox");
     let copiaTexto = resultBox.textContent;
     if (copiaTexto.trim() === "") {
@@ -193,6 +194,32 @@ function copiar() {
     } finally {
         document.body.removeChild(tempTextarea);
     }
-
 }
+*/
 
+function copiar() { //função ajustada
+    let resultBox = document.getElementById("resultBox");
+    let copiaTexto = resultBox.textContent;
+    if (copiaTexto.trim() === "") {
+        alert("Não há texto a ser copiado!");
+        return;
+    }
+    
+    if(navigator.clipboard) { //Para navegadores mais atuais.
+        navigator.clipboard.writeText(copiaTexto);
+        resultBox.textContent = "";
+    } else {
+        try {//para mais antigos
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = copiaTexto;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextarea);
+            resultBox.textContent = "";
+        } catch (err) { // se tudo falhar.
+            console.error("Erro ao copiar texto: ", err);
+        }
+    }
+     
+}
